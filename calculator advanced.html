@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculator</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<style type="text/css">
+		.Number
+		{
+			background-color: orange;
+		}
+		.Operator
+		{
+			background-color: violet;
+		}
+		button
+		{
+			height: 23px;
+			width: 25px;
+		}
+		.backspace
+		{
+			background-color: red;
+		}
+	</style>
+</head>
+<body>
+	<form>
+		<span class="operation" style="border: solid black"></span>
+		<br>
+		<button type="button" class="Number" onclick="insert(7)">7</button>
+		<button type="button" class="Number" onclick="insert(8)">8</button>
+		<button type="button" class="Number" onclick="insert(9)">9</button>
+		<button type="button" class="Operator" onclick="insert('/')">÷</button>
+		<br>
+		<button type="button" class="Number" onclick="insert(4)">4</button>
+		<button type="button" class="Number" onclick="insert(5)">5</button>
+		<button type="button" class="Number" onclick="insert(6)">6</button>
+		<button type="button" class="Operator" onclick="insert('*')">X</button>
+		<br>
+		<button type="button" class="Number" onclick="insert(1)">1
+		</button>
+		<button type="button" class="Number" onclick="insert(2)">2</button>
+		<button type="button" class="Number" onclick="insert(3)">3</button>
+		<button type="button" class="Operator" onclick="insert('-')">-</button>
+		<br>
+
+		<button type="button" style="background-color: red"onclick="clearexpression()">C</button>
+
+		<button type="button" class="Number" onclick="insert(0)">0</button>
+
+		<button type="button" style="background-color: lightgreen"value="=" onclick="equals()">=</button>
+		<button type="button" class="Operator"onclick="insert('+')">+</button>
+		<br>
+		<button type="button" class="Number"onclick="insert('(')">(</button>
+		<button type="button" class="Number"onclick="insert('.')">.</button>
+		<button type="button" class="Number"onclick="insert(')')">)</button>
+		<button type="button" class="backspace"onclick="backone()">⌫</button>
+		<br>
+	</form>
+	<script>
+		function insert(num)
+		{
+			$(".operation").css('color', 'orange');
+			$(".operation").html($(".operation").html() + num);
+		}
+		function equals()
+		{
+			try
+			{
+				let answer = eval($(".operation").html());
+			}
+			catch
+			{
+				$(".operation").html("Wrong input");
+				$(".operation").css('color', 'red');
+			}
+			$(".operation").html(eval($(".operation").html()));
+			$(".operation").css('color','lightgreen');
+		}
+		function clearexpression()
+		{
+			$(".operation").html(" ");
+		}
+		function backone()
+		{
+			let expression = $(".operation").html()
+			let char_to_remove = (expression.length) - 1;
+			$(".operation").html('');
+			for (let i = 0; i < expression.length; i++)
+			{
+				if (i != char_to_remove)
+				{
+					$(".operation").append(expression[i]);
+				}
+			}
+		}
+	</script>
+</body>
+</html>
